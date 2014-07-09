@@ -1,0 +1,25 @@
+{
+  "name": "Race Manager",
+  "description": "Application for managing Pinewood Derby races or other similar races.",
+  "version": "14.7.1",
+  
+  "app": {
+    "background": {
+      "scripts": ["js/background.js"]
+    }
+  },
+  
+  "icons": {
+    "256": "img/icon-256.png",
+    "128": "img/icon-128.png",
+    "64": "img/icon-64.png"
+  },
+  
+  "offline_enabled": true,
+  
+  "permissions": [
+    "fullscreen",
+    "storage"
+    
+  ]
+}
