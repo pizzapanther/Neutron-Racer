@@ -1,0 +1,12 @@
+<ng-include src="'nav.html'"></ng-include>
+<div id="raceView" class="navPage">
+  <div class="alert alert-danger" role="alert" ng-show="error" ng-bind-html="error"></div>
+  <div class="error-box" ng-show="error">
+    <button type="button" class="btn btn-primary" ng-click="recalc(tracks, racers)">Try Again</button>
+  </div>
+  <pre>
+    {{ races }}
+  </pre>
+  <br>
+  <button type="button" class="btn btn-primary" ng-click="recalc(tracks, racers)">Try Again</button>
+</div>

@@ -1,0 +1,42 @@
+<ng-include src="'nav.html'"></ng-include>
+<div id="newRaceView" class="navPage">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form role="form" ng-submit="create_race()">
+          <div class="form-group">
+            <label for="newRace-tracks">Number of Tracks</label>
+            <select class="form-control" ng-model="num_tracks" ng-options="t.name for t in tracks"></select>
+          </div>
+          <fieldset>
+            <legend>Participants</legend>
+            <table class="table">
+              <tbody class="form-group racer" ng-repeat="racer in racers track by $index">
+                <tr>
+                  <td><label>{{ $index + 1 }}.</label></td>
+                  <td>
+                    <input class="form-control" ng-model="racer.name" required placeholder="Participant's Name">
+                  </td>
+                  <td>
+                    <a class="btn btn-danger btn-sm" ng-click="remove_racer($index)"><i class="fa fa-times"></i></a>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <input class="form-control" ng-model="racer.vehicle" placeholder="Vehicle Name (optional)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <a class="btn btn-success btn-sm" ng-click="add_racer()"><i class="fa fa-plus"></i> Add Participant</a>
+            <hr>
+          </fieldset>
+          <div class="form-group">
+            <button class="btn btn-primary btn-lg" type="submit">Create Race</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
