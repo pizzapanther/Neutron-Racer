@@ -18,9 +18,12 @@ html {
 
 .navbar {
   img {
-    width: 44px;
     height: 44px;
-    margin-right: 10px;
+    margin: 2px 20px 0 0;
+  }
+  
+  .navbar-nav.navbar-right:last-child {
+    margin-right: 0;
   }
   
   a.navbar-brand {
@@ -93,5 +96,131 @@ html {
 #raceView {
   .error-box {
     margin: 20px;
+  }
+  
+  .races {
+    margin: 65px 20px 20px 20px;
+  }
+  
+  .race, .results {
+    display: none;
+    
+    h2 {
+      font-weight: bold;
+    }
+    
+    table {
+      margin: 10px 0 20px 0;
+      padding: 0;
+      
+      th {
+        border-bottom: 2px solid @lineColor;
+      }
+      
+      td {
+        font-size: 3.3rem;
+        border-top: 1px dotted @lineColor;
+        vertical-align: middle;
+        
+        &:nth-child(2) {
+          div {
+            
+          }
+        }
+        
+        &.next-race {
+          font-size: 2.5rem;
+          padding-bottom: 20px;
+          
+          strong {
+            display: block;
+            float: left;
+            margin: 0 20px 5px 0;
+          }
+          
+          ul {
+            list-style-type: none;
+            margin: 0 0 5px 0;
+            padding: 0;
+            display: block;
+            float: left;
+            
+            li {
+              display: block;
+              float: left;
+              margin: 0 20px 0 0;
+              
+              &:after {
+                content: ",";
+                display: inline-block;
+                margin-left: -5px;
+              }
+              
+              &:last-child {
+                &:after {
+                  content: "";
+                }
+              }
+            }
+          }
+        }
+        
+        span {
+          em {
+            font-size: 70%;
+          }
+        }
+        
+        select {
+          width: 120px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #welcomeView {
+    h1 {
+      font-size: 4.5rem;
+    }
+    
+    .title {
+      h2 {
+        font-size: 2.5rem;
+        margin: 25px 0;
+      }
+    }
+    
+    img {
+      height: 128px;
+    }
+  }
+  
+  #raceView {
+    .race, .results {
+      table {
+        td {
+          font-size: 2.5rem;
+          
+          &.next-race {
+            font-size: 2.0rem;
+            
+            ul {
+              li {
+                margin: 0 10px 0 0;
+              }
+            }
+          }
+          
+          select.input-lg {
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+          }
+        }
+      }
+    }
   }
 }

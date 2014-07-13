@@ -7,6 +7,8 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
   $scope.racers = [];
   $scope.tracks = 3;
   $scope.recalcs = 0;
+  $scope.places = [];
+  $scope.scores = [];
   
   $scope.reset_tracker = function () {
     for (var i=0; i < $scope.racers.length; i++) {
@@ -24,6 +26,7 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
       
       for (var j=0; j < $scope.tracks; j++) {
         racer.races = 0;
+        racer.places = {};
       }
     }
   };
@@ -178,9 +181,39 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
       
       if (do_break) {
         console.log(JSON.stringify($scope.races));
+        $scope.initialize_places();
+        $scope.show_race(0);
         break;
       }
     }
+  };
+  
+  $scope.show_race = function (index) {
+    $('.race').css('display', 'none');
+    $('.results').css('display', 'none');
+    setTimeout(function () { $('#race-' + index).css('display', 'block'); }, 100);
+  };
+  
+  $scope.initialize_places = function () {
+    $scope.places = [];
+    var places = ['1st', '2nd', '3rd', '4th', '5th', '6th'];
+    
+    for (var k=0; k < $scope.tracks; k++) {
+      $scope.places.push({name: places[k]});
+    }
+    
+    for (var i=0; i < $scope.racers.length; i++) {
+      var racer = $scope.racers[i];
+      
+      for (var j=0; j < $scope.races.length; j++) {
+        racer.places['race' + j] = {value: null};
+        //racer.places['race' + j] = {value: $scope.places[0]};
+      }
+    }
+  };
+  
+  $scope.place_model = function (r, j) {
+    return $scope.racers[r].places['race' + j];
   };
   
   $scope.didnt_use_track = function (r, track) {
@@ -190,6 +223,88 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
     }
     
     return false;
+  };
+  
+  $scope.racer = function (index) {
+    return $scope.racers[index];
+  };
+  
+  $scope.show_results = function () {
+    $('.race').css('display', 'none');
+    $('.results').css('display', 'block');
+    
+    $scope.scores = [];
+    for (var i=0; i < $scope.racers.length; i++) {
+      var racer = $scope.racers[i];
+      if (racer.dummy) {}
+      else {
+        var score = {name: racer.name, vehicle: racer.vehicle, score: 0};
+        
+        for (var j=0; j < $scope.races.length; j++) {
+          if (racer.places['race' + j].value) {
+            if (racer.places['race' + j].value.name === '1st') {
+              score.score += 9;
+            }
+            
+            else if (racer.places['race' + j].value.name === '2nd') {
+              score.score += 6;
+            }
+            
+            else if (racer.places['race' + j].value.name === '3rd') {
+              score.score += 3;
+            }
+            
+            else if (racer.places['race' + j].value.name === '4th') {
+              score.score += 1;
+            }
+          }
+        }
+      }
+      
+      $scope.scores.push(score);
+    }
+    
+    $scope.scores.sort($scope.score_compare);
+    var place = 1;
+    var last_score = null;
+    for (i=0; i < $scope.scores.length; i++) {
+      if (last_score !== null && $scope.scores[i].score < last_score) {
+        place += 1;
+      }
+      
+      $scope.scores[i].place = place;
+      last_score = $scope.scores[i].score;
+    }
+  };
+  
+  $scope.score_compare = function (a, b) {
+    if (a.score < b.score)
+      return 1;
+      
+    if (a.score > b.score)
+      return -1;
+      
+    return 0;
+  };
+  
+  $scope.run_tests = function (i) {
+    $scope.tracks = 3;
+    if (i === undefined) {
+      i = 2;
+    }
+    
+    $scope.racers = [];
+    console.log('Racers: ' + i);
+    for (var j=0; j < i; j++) {
+      $scope.racers.push({name: 'P' + j, vehicle: 'V' + j});
+    }
+    
+    $scope.recalc($scope.tracks, $scope.racers);
+    
+    i += 1;
+    if (i <= 50) {
+      setTimeout(function () { $scope.run_tests(i) }, 50);
+    }
   };
   
   if ($rootScope.load_race === 'new') {

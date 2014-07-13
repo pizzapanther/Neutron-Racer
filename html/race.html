@@ -4,9 +4,94 @@
   <div class="error-box" ng-show="error">
     <button type="button" class="btn btn-primary" ng-click="recalc(tracks, racers)">Try Again</button>
   </div>
-  <pre>
-    {{ races }}
-  </pre>
-  <br>
+  <div class="races">
+    <div class="race" ng-repeat="race in races" id="race-{{ $index }}">
+      <div class="pagination pull-right">
+        <button ng-hide="$first" type="button" class="btn btn-success" ng-click="show_race($index - 1)">&laquo; Prev</button>
+        &nbsp;&nbsp;&nbsp;
+        <button ng-hide="$last" type="button" class="btn btn-success" ng-click="show_race($index + 1)">Next &raquo;</button>
+        &nbsp;&nbsp;&nbsp;
+        <button ng-show="$last" type="button" class="btn btn-primary" ng-click="show_results()">Show Results</button>
+      </div>
+      <h2>Race # {{ $index + 1 }}</h2>
+      <div class="clearfix"></div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Lane</th>
+            <th>Racer</th>
+            <th>Place</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="r in race">
+            <td>{{ $index + 1 }}:</td>
+            <td>
+              <div ng-hide="racer(r).dummy">
+                <span ng-hide="racer(r).vehicle">{{ racer(r).name }}</span>
+                <span ng-show="racer(r).vehicle">{{ racer(r).vehicle }} <em>by {{ racer(r).name }}</em></span>
+              </div>
+            </td>
+            <td>
+              <div ng-hide="racer(r).dummy">
+                <select class="form-control input-lg" ng-model="place_model(r, $parent.$index).value" ng-options="p.name for p in places">
+                  <option value="">Place</option>
+                </select>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3" class="next-race">
+              <div ng-hide="$last">
+                <strong>Next Race:</strong>
+                <ul>
+                  <li ng-repeat="r in races[$index + 1]">
+                    <span ng-hide="racer(r).vehicle">{{ racer(r).name }}</span>
+                    <span ng-show="racer(r).vehicle">{{ racer(r).vehicle }}</span>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="results" id="results">
+      <div class="pagination pull-right">
+        <button ng-hide="$first" type="button" class="btn btn-success" ng-click="show_race(races.length - 1)">&laquo; Prev</button>
+        &nbsp;&nbsp;&nbsp;
+      </div>
+      <h2>Race Results</h2>
+      <div class="clearfix"></div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Place</th>
+            <th>Racer</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="score in scores">
+            <td>{{ score.place }}</td>
+            <td>
+              <div>
+                <span ng-hide="score.vehicle">{{ score.name }}</span>
+                <span ng-show="score.vehicle">{{ score.vehicle }} <em>by {{ score.name }}</em></span>
+              </div>
+            </td>
+            <td>
+              <div>
+                <span>{{ score.score }}</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!--<br>
   <button type="button" class="btn btn-primary" ng-click="recalc(tracks, racers)">Try Again</button>
+  <button type="button" class="btn btn-primary" ng-click="run_tests()">Run Tests</button>-->
 </div>
