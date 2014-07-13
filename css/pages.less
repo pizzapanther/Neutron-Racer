@@ -1,4 +1,97 @@
 body {
   background-color: @bg;
   color: @fg;
+  overflow: auto;
+}
+
+html {
+  overflow: auto;
+}
+
+.alert {
+  margin: 10px 20px;
+  
+  em {
+    font-size: 80%;
+  }
+}
+
+.navbar {
+  img {
+    width: 44px;
+    height: 44px;
+    margin-right: 10px;
+  }
+  
+  a.navbar-brand {
+    padding: 3px 15px;
+    
+    div {
+      display: inline-block;
+      color: @fg;
+    }
+    
+    .title {
+      font-family: @specialFont;
+      color: @fg;
+      font-size: 3.0rem;
+      margin: 0 10px 0 0;
+    }
+    
+    .v {
+      font-size: 80%;
+    }
+  }
+}
+
+.navPage {
+  margin: 60px 0 0 0;
+}
+
+#welcomeView {
+  h1 {
+    font-family: @specialFont;
+    font-size: 6.0rem;
+  }
+  
+  .title {
+    margin: 40px 0;
+    text-align: center;
+    
+    h2 {
+      margin: 40px 0;
+    }
+  }
+}
+
+#newRaceView {
+  form {
+    max-width: 500px;
+  }
+  
+  table.table {
+    td {
+      border-top: 0;
+    }
+    
+    tbody {
+      tr {
+        td {
+          padding: 0 8px 15px 8px;
+        }
+        
+        &:first-child {
+          td {
+            padding-top: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+#raceView {
+  .error-box {
+    margin: 20px;
+  }
 }
