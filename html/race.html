@@ -46,8 +46,9 @@
                 <strong>Next Race:</strong>
                 <ul>
                   <li ng-repeat="r in races[$index + 1]">
-                    <span ng-hide="racer(r).vehicle">{{ racer(r).name }}</span>
-                    <span ng-show="racer(r).vehicle">{{ racer(r).vehicle }}</span>
+                    <span ng-if="racer(r).dummy">Empty</span>
+                    <span ng-if="!racer(r).dummy" ng-hide="racer(r).vehicle">{{ racer(r).name }}</span>
+                    <span ng-if="!racer(r).dummy" ng-show="racer(r).vehicle">{{ racer(r).vehicle }}</span>
                   </li>
                 </ul>
                 <div class="clearfix"></div>
@@ -73,7 +74,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="score in scores">
+          <tr ng-repeat="score in scores track by $index">
             <td>{{ score.place }}</td>
             <td>
               <div>

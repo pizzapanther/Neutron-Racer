@@ -259,9 +259,9 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
             }
           }
         }
+        
+        $scope.scores.push(score);
       }
-      
-      $scope.scores.push(score);
     }
     
     $scope.scores.sort($scope.score_compare);
@@ -288,7 +288,7 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
   };
   
   $scope.run_tests = function (i) {
-    $scope.tracks = 3;
+    $scope.tracks = 4;
     if (i === undefined) {
       i = 2;
     }
