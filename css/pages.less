@@ -16,6 +16,10 @@ html {
   }
 }
 
+.clickme {
+  cursor: pointer;
+}
+
 .navbar {
   img {
     height: 44px;
@@ -102,6 +106,26 @@ html {
     margin: 65px 20px 20px 20px;
   }
   
+  .schedule {
+    display: none;
+    margin: -15px 0 0 0;
+    padding: 20px;
+    
+    h2 {
+      font-weight: bold;
+    }
+    
+    table {
+      th {
+        border-bottom: 2px solid @lineColor;
+      }
+      
+      td {
+        border-top: 1px dotted @lineColor;
+      }
+    }
+  }
+  
   .race, .results {
     display: none;
     
@@ -118,7 +142,7 @@ html {
       }
       
       td {
-        font-size: 3.3rem;
+        font-size: 3.6rem;
         border-top: 1px dotted @lineColor;
         vertical-align: middle;
         
@@ -129,8 +153,7 @@ html {
         }
         
         &.next-race {
-          font-size: 2.5rem;
-          padding-bottom: 20px;
+          font-size: 2.7rem;
           
           strong {
             display: block;
@@ -161,6 +184,27 @@ html {
                   content: "";
                 }
               }
+            }
+          }
+          
+          .top-scores > div {
+            display: inline-block;
+            margin: 0 10px 0 0;
+            
+            &:after {
+              content: ",";
+              display: inline-block;
+              margin-left: -5px;
+            }
+            
+            &:last-child {
+              &:after {
+                content: "";
+              }
+            }
+            
+            .pts {
+              color: @lineColor;
             }
           }
         }

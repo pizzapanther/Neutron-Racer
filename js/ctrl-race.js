@@ -191,7 +191,14 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
   $scope.show_race = function (index) {
     $('.race').css('display', 'none');
     $('.results').css('display', 'none');
+    $('.schedule').css('display', 'none');
+    
+    $scope.calc_scores();
     setTimeout(function () { $('#race-' + index).css('display', 'block'); }, 100);
+  };
+  
+  $scope.top_scores = function () {
+    return $scope.scores.slice(0, 4);
   };
   
   $scope.initialize_places = function () {
@@ -212,6 +219,26 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
     }
   };
   
+  $scope.points = function (value) {
+    if (value === '1st') {
+      return 9;
+    }
+    
+    else if (value === '2nd') {
+      return 6;
+    }
+    
+    else if (value === '3rd') {
+      return 3;
+    }
+    
+    else if (value === '4th') {
+      return 1;
+    }
+    
+    return 0;
+  };
+  
   $scope.place_model = function (r, j) {
     return $scope.racers[r].places['race' + j];
   };
@@ -229,10 +256,7 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
     return $scope.racers[index];
   };
   
-  $scope.show_results = function () {
-    $('.race').css('display', 'none');
-    $('.results').css('display', 'block');
-    
+  $scope.calc_scores = function () {
     $scope.scores = [];
     for (var i=0; i < $scope.racers.length; i++) {
       var racer = $scope.racers[i];
@@ -242,21 +266,7 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
         
         for (var j=0; j < $scope.races.length; j++) {
           if (racer.places['race' + j].value) {
-            if (racer.places['race' + j].value.name === '1st') {
-              score.score += 9;
-            }
-            
-            else if (racer.places['race' + j].value.name === '2nd') {
-              score.score += 6;
-            }
-            
-            else if (racer.places['race' + j].value.name === '3rd') {
-              score.score += 3;
-            }
-            
-            else if (racer.places['race' + j].value.name === '4th') {
-              score.score += 1;
-            }
+            score.score += $scope.points(racer.places['race' + j].value.name);
           }
         }
         
@@ -275,6 +285,14 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
       $scope.scores[i].place = place;
       last_score = $scope.scores[i].score;
     }
+  };
+  
+  $scope.show_results = function () {
+    $('.race').css('display', 'none');
+    $('.results').css('display', 'block');
+    $('.schedule').css('display', 'none');
+    
+    $scope.calc_scores();
   };
   
   $scope.score_compare = function (a, b) {
@@ -310,4 +328,22 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
   if ($rootScope.load_race === 'new') {
     $scope.calc_races($rootScope.new_tracks, $rootScope.new_racers);
   }
+  
+  $scope.race_schedule = function () {
+    $('.race').css('display', 'none');
+    $('.results').css('display', 'none');
+    $('.schedule').css('display', 'block');
+  };
+  
+  $scope.race_schedule_ok = function () {
+    $scope.show_race(0);
+  };
+  
+  $scope.prt = function () {
+    print();
+  };
+  
+  $scope.nav_extra = [
+    {name: "Race Schedule", f: $scope.race_schedule}
+  ];
 });
