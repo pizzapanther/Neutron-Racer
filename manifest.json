@@ -1,7 +1,7 @@
 {
   "name": "Race Manager",
   "description": "Application for managing Pinewood Derby races or other similar races.",
-  "version": "14.7.3",
+  "version": "14.7.4",
   
   "app": {
     "background": {

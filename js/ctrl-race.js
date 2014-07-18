@@ -9,6 +9,7 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
   $scope.recalcs = 0;
   $scope.places = [];
   $scope.scores = [];
+  $scope.show_top_scores = true;
   
   $scope.reset_tracker = function () {
     for (var i=0; i < $scope.racers.length; i++) {
@@ -180,7 +181,6 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
       }
       
       if (do_break) {
-        console.log(JSON.stringify($scope.races));
         $scope.initialize_places();
         $scope.show_race(0);
         break;
@@ -305,30 +305,6 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
     return 0;
   };
   
-  $scope.run_tests = function (i) {
-    $scope.tracks = 4;
-    if (i === undefined) {
-      i = 2;
-    }
-    
-    $scope.racers = [];
-    console.log('Racers: ' + i);
-    for (var j=0; j < i; j++) {
-      $scope.racers.push({name: 'P' + j, vehicle: 'V' + j});
-    }
-    
-    $scope.recalc($scope.tracks, $scope.racers);
-    
-    i += 1;
-    if (i <= 50) {
-      setTimeout(function () { $scope.run_tests(i) }, 50);
-    }
-  };
-  
-  if ($rootScope.load_race === 'new') {
-    $scope.calc_races($rootScope.new_tracks, $rootScope.new_racers);
-  }
-  
   $scope.race_schedule = function () {
     $('.race').css('display', 'none');
     $('.results').css('display', 'none');
@@ -343,7 +319,74 @@ RaceApp.controller('RaceCtrl', function($scope, $rootScope, $location, $sce) {
     print();
   };
   
+  $scope.toggle_top = function () {
+    if ($scope.show_top_scores) {
+      $scope.show_top_scores = false;
+    }
+    
+    else {
+      $scope.show_top_scores = true;
+    }
+  };
+  
+  $scope.run_tests = function (i) {
+    $scope.tracks = 3;
+    if (i === undefined) {
+      i = 2;
+    }
+    
+    $scope.racers = [];
+    console.log('Racers: ' + i);
+    for (var j=0; j < i; j++) {
+      $scope.racers.push({name: 'P' + j, vehicle: 'V' + j});
+    }
+    
+    $scope.recalc($scope.tracks, $scope.racers);
+    
+    var counts = {};
+    for (j=0; j < $scope.races.length; j++) {
+      var race = $scope.races[j];
+      for (var k=0; k < race.length; k++) {
+        var racer = race[k];
+        if (counts['racer-' + racer]) {
+          counts['racer-' + racer] += 1;
+        }
+        
+        else {
+          counts['racer-' + racer] = 1;
+        }
+      }
+    }
+    
+    var last_count = null;
+    for (j in counts) {
+      if (last_count) {
+        if (last_count == counts[j]) {}
+        else {
+          console.log('Race count does not match.');
+          return null;
+        }
+      }
+      
+      else {
+        last_count = counts[j];
+      }
+    }
+    
+    console.log('Race count good!');
+    
+    i += 1;
+    if (i <= 50) {
+      setTimeout(function () { $scope.run_tests(i) }, 50);
+    }
+  };
+  
+  if ($rootScope.load_race === 'new') {
+    $scope.calc_races($rootScope.new_tracks, $rootScope.new_racers);
+  }
+  
   $scope.nav_extra = [
+    {name: "Toggle Top Score View", f: $scope.toggle_top},
     {name: "Race Schedule", f: $scope.race_schedule}
   ];
 });
