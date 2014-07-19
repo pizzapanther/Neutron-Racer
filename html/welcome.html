@@ -4,5 +4,10 @@
     <img src="/img/icon-256.png" alt="">
     <h2>Version {{ version }}</h2>
     <a class="btn btn-primary btn-lg" href="#/new-race">Start A Race</a>
+    <div ng-if="win_id == 'ndrive-main'">
+      <br>
+      <br>
+      <a class="btn btn-success clickme" ng-click="new_window()">New Window</a>
+    </div>
   </div>
 </div>
