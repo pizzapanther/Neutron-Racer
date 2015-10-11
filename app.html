@@ -5,22 +5,43 @@
     <link rel="shortcut icon" href="/img/icon-64.png">
     <link rel="stylesheet" href="/bower/angular/angular-csp.css">
     <link rel="stylesheet" href="/bower/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="/bower/roboto-fontface/css/roboto-fontface.css">
     <link rel="stylesheet" href="/less/nracer.css">
     <title>Neutron Racer v{{ version }}</title>
   </head>
   <body layout="column">
     <md-toolbar layout="row">
-      <div class="md-toolbar-tools">
-        <h1 layout="row" layout-align="center center">
-          <img src="/img/car.png" alt="">
-          <div>Neutron Racer v{{ version }}</div>
-        </h1>
+      <div class="md-toolbar-tools" layout="row">
+        <div flex>
+          <h1 layout="row" layout-align="start center">
+            <img src="/img/car.png" alt="">
+            <div>Neutron Racer <span>v{{ version }}</span></div>
+          </h1>
+        </div>
+        <div>
+          <md-menu>
+            <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open menu">
+              <md-icon>more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item>
+                <md-button ng-click="goto('/')">Welcome Screen</md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="goto('/new-race')">New Race</md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="goto('/races')">Stored Races</md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
       </div>
     </md-toolbar>
     <div layout="row" flex>
       <div layout="column" flex id="content">
         <md-content layout="column" flex class="md-padding">
-          main content
+          <div ng-view></div>
         </md-content>
       </div>
     </div>
@@ -28,8 +49,14 @@
     <script src="/bower/angular-animate/angular-animate.min.js"></script>
     <script src="/bower/angular-aria/angular-aria.min.js"></script>
     <script src="/bower/angular-material/angular-material.min.js"></script>
+    <script src="/bower/angular-route/angular-route.min.js"></script>
     
     <script src="/nracer/app.js"></script>
-    <script src="/nracer/app-ctrl.js"></script>
+    <script src="/nracer/ctrl-app.js"></script>
+    <script src="/nracer/ctrl-new-race.js"></script>
+    <script src="/nracer/ctrl-race-list.js"></script>
+    
+    <script src="/nracer/srvc-storage.js"></script>
+    <script src="/nracer/srvc-race.js"></script>
   </body>
 </html>
