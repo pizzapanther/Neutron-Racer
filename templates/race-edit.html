@@ -1,0 +1,75 @@
+<div class="race-edit-ctrl">
+  <div ng-show="!race">
+    <h1>Error Loading Race</h1>
+  </div>
+  <div ng-show="race">
+    <form novalidate name="raceform">
+      <h3 ng-dblclick="test_racers()">Created: {{ race.date }}</h3>
+      <md-input-container>
+        <label>Race Name</label>
+        <input md-maxlength="70" required name="name" ng-model="race.name" ng-change="save_race()">
+        <div ng-messages="raceform.name.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="md-maxlength">
+            The name has to be less than 70 characters long.
+          </div>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <label>Number of Lanes</label>
+        <md-select ng-model="race.lanes" ng-change="save_race()">
+          <md-option value="2">2</md-option>
+          <md-option value="3">3</md-option>
+          <md-option value="4">4</md-option>
+          <md-option value="5">5</md-option>
+          <md-option value="6">6</md-option>
+        </md-select>
+      </md-input-container>
+      <hr>
+      <fieldset>
+        <legend>Racers</legend>
+        <ul>
+          <li ng-repeat="racer in race.racers track by $index">
+            <md-button ng-click="remove_racer($index, $event)" class="md-fab md-warn md-mini" aria-label="Remove racer {{ $index + 1 }}">
+              <md-icon>clear</md-icon>
+            </md-button>
+            <strong>Racer {{ $index + 1 }}</strong>
+            <md-input-container>
+              <label>Name</label>
+              <input md-maxlength="70" required name="racer_name_{{ $index }}" ng-model="racer.name" ng-change="save_race()">
+              <div ng-messages="raceform['racer_name_' + $index].$error">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="md-maxlength">
+                  The name has to be less than 70 characters long.
+                </div>
+              </div>
+            </md-input-container>
+            <md-input-container>
+              <label>Car Number</label>
+              <input type="number" step="1" required name="racer_num_{{ $index }}" ng-model="racer.num" ng-change="save_race()">
+              <div ng-messages="raceform['racer_num_' + $index].$error">
+                <div ng-message="required">This is required.</div>
+              </div>
+            </md-input-container>
+            <md-input-container>
+              <label>Car Name</label>
+              <input md-maxlength="70" name="racer_cname_{{ $index }}" ng-model="racer.car_name" ng-change="save_race()">
+              <div ng-messages="raceform['racer_cname_' + $index].$error">
+                <div ng-message="md-maxlength">
+                  The name has to be less than 70 characters long.
+                </div>
+              </div>
+            </md-input-container>
+          </li>
+        </ul>
+        <md-button class="md-raised" ng-click="add_racer()">
+          <md-icon>add</md-icon> Add Racer
+        </md-button>
+      </fieldset>
+      <hr>
+      <md-button class="md-raised md-primary" ng-click="calc_heats($event)">
+        <md-icon>play_arrow</md-icon> Calculate Heats
+      </md-button>
+    </form>
+  </div>
+</div>

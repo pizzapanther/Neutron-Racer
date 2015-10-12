@@ -1,4 +1,4 @@
-var nracer = angular.module('NRacer', ['ngMaterial', 'ngRoute']);
+var nracer = angular.module('NRacer', ['ngMaterial', 'ngRoute', 'debounce', 'ngMessages']);
 
 nracer.config(function($routeProvider) {
   $routeProvider
@@ -17,9 +17,40 @@ nracer.config(function($routeProvider) {
       controller: 'RaceEditCtrl',
       templateUrl: '/templates/race-edit.html'
     })
+    .when('/race/:id/results', {
+      controller: 'RaceResultsCtrl',
+      templateUrl: '/templates/race-results.html'
+    })
     .when('/race/:id/:heat', {
       controller: 'RaceHeatCtrl',
       templateUrl: '/templates/race-heat.html'
     })
     .otherwise({redirectTo: '/'});
+});
+
+nracer.filter('numSuffix', function() {
+  var suffixes = ["th", "st", "nd", "rd"];
+  return function (num) {
+    if (num) {
+      num = num.toString();
+      var last_num = num.charAt(num.length - 1);
+      var ending = 'th';
+      
+      if (last_num == '1') {
+        ending = 'st';
+      }
+      
+      else if (last_num == '2') {
+        ending = 'nd';
+      }
+      
+      else if (last_num == '3') {
+        ending = 'rd';
+      }
+      
+      return num + ending;
+    }
+    
+    return num;
+  };
 });

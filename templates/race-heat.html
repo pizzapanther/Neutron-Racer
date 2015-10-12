@@ -1,0 +1,50 @@
+<div class="race-heat-ctrl">
+  <div class="buttons">
+    <md-button ng-if="prev_heat" class="md-fab md-mini" ng-click="go_heat(prev_heat)">
+      <md-icon>navigate_before</md-icon>
+    </md-button>
+    <md-button ng-if="next_heat" class="md-fab md-mini" ng-click="go_heat(next_heat)">
+      <md-icon>navigate_next</md-icon>
+    </md-button>
+    <md-button ng-if="!next_heat" class="md-fab md-mini" ng-click="see_results()">
+      <md-icon>navigate_next</md-icon>
+    </md-button>
+  </div>
+  <h2>
+    {{ race.name }} - Heat #{{ heat }}
+  </h2>
+  <ul>
+    <li ng-repeat="lane in heat_data track by $index">
+      <div class="lane">
+        Lane {{ $index + 1 }}
+      </div>
+      <div ng-repeat="racer in [get_racer(lane.racer)]" layout="row" layout-align="start start">
+        <div class="racer" flex>
+          <span class="num">{{ racer.num }}:</span>
+          <span class="name" ng-if="racer.car_name">
+            {{ racer.car_name }}
+            <span>by {{ racer.name }}</span>
+          </span>
+          <span class="name" ng-if="!racer.car_name">{{ racer.name }}</span>
+        </div>
+        <div>
+          <md-input-container>
+            <label>Place</label>
+            <md-select ng-model="lane.result" ng-change="set_points(lane)">
+              <md-option ng-repeat="lane in heat_data track by $index" value="{{ $index + 1 }}">
+                {{ $index + 1 | numSuffix }}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div ng-if="next_heat" class="next-heat">
+    Next Race: 
+    <span ng-repeat="racer in next_racers track by $index">{{ racer.num }}: {{ racer.name }}</span>
+  </div>
+  <div>
+    <md-button ng-click="see_results()">Go To Race Schedule</md-button>
+  </div>
+</div>

@@ -16,3 +16,22 @@
     padding: 5px 15px 0 0;
   }
 }
+
+@media print {
+  .page-break {
+    page-break-after: always;
+  }
+  
+  md-content {
+    overflow: visible;
+  }
+  
+  md-toolbar:not(.md-menu-toolbar) {
+    color: #000;
+    background-color: #fff;
+  }
+  
+  .md-button {
+    display: none;
+  }
+}
