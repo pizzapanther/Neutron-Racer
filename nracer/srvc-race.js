@@ -1,4 +1,4 @@
-nracer.service("RaceService", function (StorageService) {
+nracer.service("RaceService", function (StorageService, RotationService) {
   var RaceService = this;
   
   RaceService.races = StorageService.get('races') || {};
@@ -41,14 +41,7 @@ nracer.service("RaceService", function (StorageService) {
   };
   
   RaceService.calc_heats = function (race) {
-    for (var l=0; l < race.lanes; l++) {
-      for (var r1=0; r1 < race.racers.length; r1 = r1 + 2) {
-        var r2 = r1 + 1;
-        var heat = [{racer: r1}, {racer: r2}];
-        race.heats.push(heat);
-      }
-    }
-    
+    race.heats = RotationService.calc_heats(race);
     race.calculated = true;
     
     RaceService.save();
