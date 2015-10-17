@@ -1,6 +1,6 @@
 var nracer = angular.module('NRacer', ['ngMaterial', 'ngRoute', 'debounce', 'ngMessages']);
 
-nracer.config(function($routeProvider) {
+nracer.config(function($routeProvider, $mdThemingProvider) {
   $routeProvider
     .when('/', {
       templateUrl: '/templates/welcome.html'
@@ -26,6 +26,10 @@ nracer.config(function($routeProvider) {
       templateUrl: '/templates/race-heat.html'
     })
     .otherwise({redirectTo: '/'});
+    
+  $mdThemingProvider.theme('default')
+    .primaryPalette('teal')
+    .accentPalette('amber');
 });
 
 nracer.filter('numSuffix', function() {

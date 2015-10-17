@@ -19,7 +19,10 @@
         Lane {{ $index + 1 }}
       </div>
       <div ng-repeat="racer in [get_racer(lane.racer)]" layout="row" layout-align="start start">
-        <div class="racer" flex>
+        <div class="racer" flex ng-if="lane.ghost">
+          <span class="num">Empty</span>
+        </div>
+        <div class="racer" flex ng-if="!lane.ghost">
           <span class="num">{{ racer.num }}:</span>
           <span class="name" ng-if="racer.car_name">
             {{ racer.car_name }}
@@ -30,7 +33,7 @@
         <div>
           <md-input-container>
             <label>Place</label>
-            <md-select ng-model="lane.result" ng-change="set_points(lane)">
+            <md-select ng-model="lane.result" ng-change="set_points(lane)" aria-label="place">
               <md-option ng-repeat="lane in heat_data track by $index" value="{{ $index + 1 }}">
                 {{ $index + 1 | numSuffix }}
               </md-option>

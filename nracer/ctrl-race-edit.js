@@ -8,13 +8,6 @@ nracer.controller('RaceEditCtrl', function ($scope, $location, $routeParams, $md
   
   $scope._save_race = function () {
     RaceService.save();
-    
-    $mdToast.show(
-      $mdToast.simple()
-        .content('Changes Saved')
-        .position('bottom right')
-        .hideDelay(300)
-    );
   };
   
   $scope.save_race = debounce($scope._save_race, 1000);
@@ -40,32 +33,55 @@ nracer.controller('RaceEditCtrl', function ($scope, $location, $routeParams, $md
     }, function() { });
   };
   
-  $scope.test_racers = function () {
-    var num = window.prompt("Test Racers", "");
-    if (num) {
-      num = parseInt(num);
-      var racers = [];
-      
-      for (var i=0; i < num; i++) {
-        var n = i + 1;
-        var cnum = n + 100;
+  $scope.test_racers = function (event) {
+    $mdDialog.show({
+      controller: DialogController,
+      templateUrl: '/templates/dialog-test-racers.html',
+      targetEvent: event,
+      clickOutsideToClose:false
+    })
+    .then(function (num) {
+      if (num) {
+        num = parseInt(num);
+        var racers = [];
         
-        racers.push({
-          name: 'Racer ' + n,
-          car_name: 'Car ' + n,
-          num: cnum
-        });
+        for (var i=0; i < num; i++) {
+          var n = i + 1;
+          var cnum = n + 100;
+          
+          racers.push({
+            name: 'Racer ' + n,
+            car_name: 'Car ' + n,
+            num: cnum
+          });
+        }
+        
+        $scope.race.racers = racers;
+        $scope._save_race();
       }
-      
-      $scope.race.racers = racers;
-      $scope._save_race();
-    }
+    }, function() {
+      //cancelled
+    });
   };
   
   $scope.calc_heats = function (event) {
     if ($scope.raceform.$valid) {
-      RaceService.calc_heats($scope.race);
-      $location.url("/race/" + key + "/1");
+      var ret = RaceService.calc_heats($scope.race);
+      
+      if (ret == 'fail') {
+        $mdDialog.show(
+          $mdDialog.alert()
+            .title('Calculation Error')
+            .content('We can\'t find a race configuration that works, retry again or reduce your lane numbers.')
+            .ariaLabel('Calculation Error')
+            .ok('OK')
+            .targetEvent(event)
+        );
+      }
+      
+      else {
+        $location.url("/race/" + key + "/1");
+      }
     }
     
     else {
@@ -80,3 +96,15 @@ nracer.controller('RaceEditCtrl', function ($scope, $location, $routeParams, $md
     }
   };
 });
+
+function DialogController ($scope, $mdDialog) {
+  $scope.testers = 2;
+  
+  $scope.cancel = function() {
+    $mdDialog.cancel();
+  };
+  
+  $scope.ok = function (testers) {
+    $mdDialog.hide(testers);
+  };
+}

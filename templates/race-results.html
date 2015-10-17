@@ -22,8 +22,13 @@
           </tr>
           <tr class="lane" ng-repeat="lane in heat track by $index">
             <td ng-repeat="racer in [get_racer(lane.racer)]">
-              {{ racer.num }} : {{ racer.name }}
-              <span ng-if="racer.car_name"> : {{ racer.car_name }}</span>
+              <div class="racer" flex ng-if="lane.ghost">
+                Empty
+              </div>
+              <div class="racer" flex ng-if="!lane.ghost">
+                {{ racer.num }} : {{ racer.name }}
+                <span ng-if="racer.car_name"> : {{ racer.car_name }}</span>
+              </div>
             </td>
             <td>
               {{ lane.result | numSuffix }}

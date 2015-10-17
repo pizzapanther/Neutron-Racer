@@ -41,10 +41,17 @@ nracer.service("RaceService", function (StorageService, RotationService) {
   };
   
   RaceService.calc_heats = function (race) {
-    race.heats = RotationService.calc_heats(race);
+    var ret = RotationService.calc_heats(race);
+    
+    if (ret == 'fail') {
+      return 'fail';
+    }
+    
+    race.heats = ret;
     race.calculated = true;
     
     RaceService.save();
+    return 'success';
   };
   
   RaceService.calc_scores = function (race) {
@@ -62,7 +69,9 @@ nracer.service("RaceService", function (StorageService, RotationService) {
         if (heat[i].points) {
           scored = true;
           var racer = heat[i].racer;
-          race.racers[racer].score += heat[i].points;
+          if (race.racers[racer]) {
+            race.racers[racer].score += heat[i].points;
+          }
         }
       }
       
