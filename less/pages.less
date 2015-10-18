@@ -1,0 +1,172 @@
+.welcome-ctrl {
+  text-align: center;
+  
+  .buttons {
+    a, .material-icons {
+      font-size: 150%;
+    }
+    
+    .md-button {
+      padding: 10px 15px;
+    }
+  }
+}
+
+.race-list-ctrl {
+  .races {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .race {
+    margin: 0 0 15px 0;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid @borderColor;
+    
+    h2 {
+      margin: 0;
+    }
+    
+    > div {
+      margin: 0 0 7px 0;
+    }
+  }
+}
+
+.race-edit-ctrl {
+  md-input-container {
+    max-width: 600px;
+  }
+  
+  hr {
+    border: 0;
+    border-bottom: 1px solid @borderColor;
+  }
+  
+  fieldset {
+    border: 0;
+    
+    legend {
+      font-size: 140%;
+      font-weight: bold;
+    }
+    
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      
+      li {
+        margin: 0 0 15px 0;
+        padding: 0 0 15px 0;
+        border-bottom: 1px dotted @borderColor;
+        position: relative;
+        max-width: 650px;
+        
+        .md-fab {
+          position: absolute;
+          top: 0;
+          right: 0;
+        }
+      }
+    }
+  }
+}
+
+.race-heat-ctrl {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    
+    li {
+      margin: 0 0 10px 0;
+      padding: 0 0 10px 0;
+      border-bottom: 1px dotted @borderColor;
+    }
+    
+    .racer {
+      font-weight: 500;
+      font-size: 2.7rem;
+      
+      span {
+        > span {
+          font-size: 1.5rem;
+        }
+      }
+    }
+    
+    md-input-container {
+      padding: 2px 2px 10px;
+      display: block;
+      
+      label {
+        display: none;
+      }
+    }
+    
+    md-select {
+      font-size: 200%;
+    }
+  }
+  
+  .buttons {
+    float: right;
+  }
+  
+  .next-heat {
+    font-size: 140%;
+    border-bottom: 1px dotted @borderColor;
+    padding: 0 0 10px 15px;
+    margin: 0 0 10px 0;
+    
+    span {
+      &:after {
+        content: ", ";
+      }
+      
+      &:last-child:after {
+        content: "";
+      }
+    }
+  }
+}
+
+.race-results-ctrl {
+  .buttons {
+    float: right;
+  }
+  
+  table {
+    border: 0;
+    border-collapse: collapse;
+    font-size: 110%;
+  }
+  
+  tr.heat {
+    > td {
+      padding: 0 0 30px 0;
+    }
+  }
+  
+  table.heat {
+    td {
+      padding: 0 30px 3px 0;
+    }
+  }
+  
+  .head {
+    td {
+      font-style: italic;
+    }
+  }
+  
+  table.scores {
+    td {
+      padding: 10px 20px;
+      border-bottom: 1px dotted @borderColor;
+      font-size: 1.6rem;
+    }
+  }
+}

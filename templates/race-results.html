@@ -1,0 +1,65 @@
+<div class="race-results-ctrl">
+  <div class="buttons">
+    <md-button class="md-fab md-mini" ng-click="go_back()">
+      <md-icon>navigate_before</md-icon>
+    </md-button>
+    <md-button class="md-fab md-mini" ng-click="print()">
+      <md-icon>local_printshop</md-icon>
+    </md-button>
+  </div>
+  <h1>{{ race.name }} - {{ race.date }}</h1>
+  <table>
+    <tr class="heat" ng-repeat="heat in race.heats track by $index">
+      <td>
+        <strong>
+          <a href="#/race/{{ key }}/{{ $index + 1 }}">Heat {{ $index + 1 }}</a>
+        </strong>
+        <table class="heat">
+          <tr class="head">
+            <td>Racer</td>
+            <td>Place</td>
+            <td>Points</td>
+          </tr>
+          <tr class="lane" ng-repeat="lane in heat track by $index">
+            <td ng-repeat="racer in [get_racer(lane.racer)]">
+              <div class="racer" flex ng-if="lane.ghost">
+                Empty
+              </div>
+              <div class="racer" flex ng-if="!lane.ghost">
+                {{ racer.num }} : {{ racer.name }}
+                <span ng-if="racer.car_name"> : {{ racer.car_name }}</span>
+              </div>
+            </td>
+            <td>
+              {{ lane.result | numSuffix }}
+            </td>
+            <td>
+              {{ lane.points }}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <div ng-if="race.completed">
+    <div class="page-break"></div>
+    <h2>{{ race.name }} Scores</h2>
+    <table class="scores">
+      <tr>
+        <td>Place</td>
+        <td><em>Racer</em></td>
+        <td><em>Score</em></td>
+      </tr>
+      <tr ng-repeat="racer in race.racers | orderBy:'-score' track by $index">
+        <td>{{ place(racer.score) | numSuffix }}</td>
+        <td>
+          {{ racer.num }} : {{ racer.name }}
+          <span ng-if="racer.car_name"> : {{ racer.car_name }}</span>
+        </td>
+        <td>
+          {{ racer.score }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

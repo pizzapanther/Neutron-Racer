@@ -1,0 +1,68 @@
+<!doctype html>
+<html ng-app="NRacer" ng-controller="AppCtrl">
+  <head>
+    <meta name="viewport" content="initial-scale=1">
+    <link rel="shortcut icon" href="/img/icon-64.png">
+    <link rel="stylesheet" href="/bower/angular/angular-csp.css">
+    <link rel="stylesheet" href="/bower/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="/bower/roboto-fontface/css/roboto-fontface.css">
+    <link rel="stylesheet" href="/less/nracer.css">
+    <title>Neutron Racer v{{ version }}</title>
+  </head>
+  <body layout="column">
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools" layout="row">
+        <div flex>
+          <h1 layout="row" layout-align="start center" ng-click="goto('/')">
+            <img src="/img/neutron-racer-100.png" alt="">
+            <div>Neutron Racer <span>v{{ version }}</span></div>
+          </h1>
+        </div>
+        <div>
+          <md-menu>
+            <md-button ng-click="$mdOpenMenu($event)" class="md-icon-button" aria-label="Open menu">
+              <md-icon>more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item>
+                <md-button ng-click="goto('/')">Welcome Screen</md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="goto('/new-race')">New Race</md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="goto('/races')">Stored Races</md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+      </div>
+    </md-toolbar>
+    <div layout="row" flex>
+      <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding">
+          <div ng-view></div>
+        </md-content>
+      </div>
+    </div>
+    <script src="/bower/angular/angular.min.js"></script>
+    <script src="/bower/angular-animate/angular-animate.min.js"></script>
+    <script src="/bower/angular-aria/angular-aria.min.js"></script>
+    <script src="/bower/angular-material/angular-material.min.js"></script>
+    <script src="/bower/angular-route/angular-route.min.js"></script>
+    <script src="/bower/angular-messages/angular-messages.min.js"></script>
+    <script src="/bower/ng-debounce/angular-debounce.js"></script>
+    
+    <script src="/nracer/app.js"></script>
+    <script src="/nracer/ctrl-app.js"></script>
+    <script src="/nracer/ctrl-new-race.js"></script>
+    <script src="/nracer/ctrl-race-list.js"></script>
+    <script src="/nracer/ctrl-race-edit.js"></script>
+    <script src="/nracer/ctrl-race-heat.js"></script>
+    <script src="/nracer/ctrl-race-results.js"></script>
+    
+    <script src="/nracer/srvc-storage.js"></script>
+    <script src="/nracer/srvc-race.js"></script>
+    <script src="/nracer/srvc-chaotic-rotation.js"></script>
+  </body>
+</html>

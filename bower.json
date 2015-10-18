@@ -1,0 +1,23 @@
+{
+  "name": "Neutron-Racer",
+  "version": "15.10.1",
+  "homepage": "https://github.com/pizzapanther/Neutron-Racer",
+  "authors": [
+    "Paul Bailey <paul.m.bailey@gmail.com>"
+  ],
+  "description": "Application for managing Pinewood Derby races or other similar races.",
+  "main": "app.html",
+  "moduleType": [],
+  "keywords": [
+    "pinewood",
+    "derby"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-material": "~0.11.2",
+    "material-design-icons": "~2.0.0",
+    "roboto-fontface": "~0.4.3",
+    "ng-debounce": "~0.1.7"
+  }
+}

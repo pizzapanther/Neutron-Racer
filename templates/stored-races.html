@@ -1,0 +1,28 @@
+<div class="race-list-ctrl">
+  <h1>Stored Races</h1>
+  <ul class="races">
+    <li ng-repeat="(key, race) in races track by key" class="race md-3-line">
+      <div class="md-list-item-text">
+        <div>
+          <h2>
+            <span ng-if="race.name">{{ race.name }} </span>
+            {{ race.date }}
+          </h2>
+        </div>
+        <div>
+          Racers: {{ race.racers.length }}, Heats: {{ race.heats.length }}
+          <br>
+          <em ng-if="race.completed">Completed</em>
+        </div>
+        <div>
+          <md-button class="md-raised" ng-click="go_to_race(key)">
+            <md-icon>play_arrow</md-icon> Go To Race
+          </md-button>
+          <md-button class="md-raised md-warn" ng-click="remove_race(key, $event)">
+            <md-icon>clear</md-icon> Remove
+          </md-button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

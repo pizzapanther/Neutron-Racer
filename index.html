@@ -1,0 +1,49 @@
+<!doctype html>
+<html ng-app="NRacerHome">
+  <head>
+    <meta name="viewport" content="initial-scale=1">
+    <link rel="shortcut icon" href="/img/icon-64.png">
+    <link rel="stylesheet" href="/bower/angular/angular-csp.css">
+    <link rel="stylesheet" href="/bower/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="/bower/roboto-fontface/css/roboto-fontface.css">
+    <link rel="stylesheet" href="/homepage/index.css">
+    <title>Neutron Racer</title>
+  </head>
+  <body layout="column">
+    <md-toolbar layout="row">
+      <div class="md-toolbar-tools" layout="row">
+        <div flex>
+          <h1 layout="row" layout-align="start center">
+            <img src="/img/neutron-racer-100.png" alt="">
+            <div>Neutron Racer</div>
+          </h1>
+        </div>
+      </div>
+    </md-toolbar>
+    <div layout="row" flex>
+      <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding">
+          <div>
+            <md-button href="https://google.com" class="md-raised md-primary">
+              Chrome Web Store
+            </md-button>
+          </div>
+        </md-content>
+      </div>
+    </div>
+    <script src="/bower/angular/angular.min.js"></script>
+    <script src="/bower/angular-animate/angular-animate.min.js"></script>
+    <script src="/bower/angular-aria/angular-aria.min.js"></script>
+    <script src="/bower/angular-material/angular-material.min.js"></script>
+    
+    <script>
+      var nracer = angular.module('NRacerHome', ['ngMaterial']);
+      
+      nracer.config(function($mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+          .primaryPalette('teal')
+          .accentPalette('amber');
+      });
+    </script>
+  </body>
+</html>

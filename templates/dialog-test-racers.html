@@ -1,0 +1,33 @@
+<md-dialog aria-label="Number of Test Racers"  ng-cloak>
+  <form>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Number of Test Racers</h2>
+      <span flex></span>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <div class="md-dialog-content">
+      <md-input-container>
+        <label>Race Name</label>
+        <input ng-model="testers" type="number" min="2" step="1">
+        <div ng-messages="raceform.name.$error">
+          <div ng-message="required">This is required.</div>
+          <div ng-message="md-maxlength">
+            The name has to be less than 70 characters long.
+          </div>
+        </div>
+      </md-input-container>
+    </div>
+  </md-dialog-content>
+  <div class="md-actions" layout="row">
+    <span flex></span>
+    <md-button ng-click="ok(testers)" class="md-raised md-primary">
+     OK
+    </md-button>
+    <md-button ng-click="cancel()" class="md-raised md-warn">
+      Cancel
+    </md-button>
+  </div>
+  </form>
+</md-dialog>
