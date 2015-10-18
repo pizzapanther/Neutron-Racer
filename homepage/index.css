@@ -1,0 +1,6 @@
+.md-toolbar-tools img {
+  max-height: 48px;
+  max-width: 25%;
+  display: block;
+  padding: 5px 15px 0 0;
+}
