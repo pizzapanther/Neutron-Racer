@@ -36,13 +36,13 @@ html {
   font-size: 1.0rem;
 }
 .md-toolbar-tools h1 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin: inherit;
   cursor: pointer;
 }
 .md-toolbar-tools h1 span {
-  font-size: 70%;
+  font-size: 60%;
   font-weight: normal;
 }
 .md-toolbar-tools img {
@@ -181,6 +181,7 @@ md-dialog md-dialog-content {
 }
 .race-results-ctrl table.heat td {
   padding: 0 30px 3px 0;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.12);
 }
 .race-results-ctrl .head td {
   font-style: italic;
