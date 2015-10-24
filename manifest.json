@@ -5,7 +5,7 @@
   
   "app": {
     "background": {
-      "scripts": ["js/background.js"]
+      "scripts": ["chrome-app.js"]
     }
   },
   
@@ -20,6 +20,5 @@
   "permissions": [
     "fullscreen",
     "storage"
-    
   ]
 }

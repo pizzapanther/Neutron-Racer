@@ -1,6 +1,17 @@
-var nracer = angular.module('NRacer', ['ngMaterial', 'ngRoute', 'debounce', 'ngMessages']);
+var nracer = angular.module(
+  'NRacer',
+  ['ngMaterial', 'ngRoute', 'debounce', 'ngMessages'],
+  function ($provide) {
+    // Prevent Angular from sniffing for the history API
+    // since it's not supported in packaged apps.
+    $provide.decorator('$window', function($delegate) {
+        $delegate.history = null;
+        return $delegate;
+    });
+  }
+);
 
-nracer.config(function($routeProvider, $mdThemingProvider) {
+nracer.config(function($routeProvider, $mdThemingProvider, $compileProvider) {
   $routeProvider
     .when('/', {
       templateUrl: '/templates/welcome.html'
@@ -30,6 +41,8 @@ nracer.config(function($routeProvider, $mdThemingProvider) {
   $mdThemingProvider.theme('default')
     .primaryPalette('teal')
     .accentPalette('amber');
+    
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|mailto|chrome-extension):/);
 });
 
 nracer.filter('numSuffix', function() {

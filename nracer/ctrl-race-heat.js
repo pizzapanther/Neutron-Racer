@@ -1,33 +1,35 @@
 nracer.controller('RaceHeatCtrl', function ($scope, $location, $routeParams, RaceService) {
   var key = $routeParams.id;
   
-  $scope.race = RaceService.get_race(key);
-  $scope.heat = parseInt($routeParams.heat);
-  $scope.heati = $scope.heat - 1;
-  $scope.heat_data = $scope.race.heats[$scope.heati];
-  
-  $scope.next_heat = $scope.heat + 1;
-  $scope.prev_heat = $scope.heat - 1;
+  RaceService.ready().then(function () {
+    $scope.race = RaceService.get_race(key);
+    $scope.heat = parseInt($routeParams.heat);
+    $scope.heati = $scope.heat - 1;
+    $scope.heat_data = $scope.race.heats[$scope.heati];
+    
+    $scope.next_heat = $scope.heat + 1;
+    $scope.prev_heat = $scope.heat - 1;
+    
+    if ($scope.next_heat > $scope.race.heats.length) {
+      $scope.next_heat = null;
+    }
+    
+    else {
+      $scope.next_racers = [];
+      var next_data = $scope.race.heats[$scope.heati + 1];
+      for (var i=0; i < next_data.length; i++) {
+        $scope.next_racers.push($scope.get_racer(next_data[i].racer));
+      }
+    }
+    
+    if ($scope.prev_heat <= 0) {
+      $scope.prev_heat = null;
+    }
+  });
   
   $scope.get_racer = function (index) {
     return $scope.race.racers[index];
   };
-  
-  if ($scope.next_heat > $scope.race.heats.length) {
-    $scope.next_heat = null;
-  }
-  
-  else {
-    $scope.next_racers = [];
-    var next_data = $scope.race.heats[$scope.heati + 1];
-    for (var i=0; i < next_data.length; i++) {
-      $scope.next_racers.push($scope.get_racer(next_data[i].racer));
-    }
-  }
-  
-  if ($scope.prev_heat <= 0) {
-    $scope.prev_heat = null;
-  }
   
   $scope.set_points = function (lane) {
     lane.points = 0;

@@ -1,7 +1,25 @@
-nracer.service("RaceService", function (StorageService, RotationService) {
+nracer.service("RaceService", function ($q, $timeout, StorageService, RotationService) {
   var RaceService = this;
   
-  RaceService.races = StorageService.get('races') || {};
+  StorageService.get('races').then(function (races) {
+    RaceService.races = races || {};
+  });
+  
+  RaceService.ready = function (deferred) {
+    deferred = deferred || $q.defer();
+    
+    if (RaceService.races) {
+      deferred.resolve();
+    }
+    
+    else {
+      $timeout(function () {
+        RaceService.ready(deferred);
+      }, 10);
+    }
+    
+    return deferred.promise;
+  };
   
   RaceService.new_race = function () {
     var d = new Date();
@@ -82,6 +100,7 @@ nracer.service("RaceService", function (StorageService, RotationService) {
     
     return completed_heats == race.heats.length;
   };
+  
   
   return RaceService;
 });

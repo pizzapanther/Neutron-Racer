@@ -1,5 +1,8 @@
 nracer.controller('RaceListCtrl', function ($scope, $mdDialog, $location, RaceService) {
-  $scope.races = RaceService.races;
+  
+  RaceService.ready().then(function () {
+    $scope.races = RaceService.races;
+  });
   
   $scope.remove_race = function (key, event) {
     var name = $scope.races[key].name || "Race " + $scope.races[key].date;

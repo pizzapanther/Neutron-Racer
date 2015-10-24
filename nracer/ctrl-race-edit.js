@@ -1,10 +1,12 @@
 nracer.controller('RaceEditCtrl', function ($scope, $location, $routeParams, $mdToast, debounce, $mdDialog, RaceService) {
   var key = $routeParams.id;
   
-  $scope.race = RaceService.get_race(key);
-  if ($scope.race.calculated) {
-    $location.url("/race/" + key + "/1");
-  }
+  RaceService.ready().then(function () {
+    $scope.race = RaceService.get_race(key);
+    if ($scope.race.calculated) {
+      $location.url("/race/" + key + "/1");
+    }
+  });
   
   $scope._save_race = function () {
     RaceService.save();

@@ -1,22 +1,26 @@
 nracer.controller('RaceResultsCtrl', function ($scope, $location, $routeParams, RaceService) {
   var key = $routeParams.id;
   $scope.key = key;
-  $scope.race = RaceService.get_race(key);
   
-  var completed = RaceService.calc_scores($scope.race);
-  $scope.race.completed = completed;
-  RaceService.save();
-  
-  $scope.scores = [];
-  for (var i=0; i < $scope.race.racers.length; i++) {
-    var index = $scope.scores.indexOf($scope.race.racers[i].score);
+  RaceService.ready().then(function () {
+    $scope.race = RaceService.get_race(key);
     
-    if (index < 0) {
-      $scope.scores.push($scope.race.racers[i].score);
+    var completed = RaceService.calc_scores($scope.race);
+    $scope.race.completed = completed;
+    RaceService.save();
+    
+    $scope.scores = [];
+    
+    for (var i=0; i < $scope.race.racers.length; i++) {
+      var index = $scope.scores.indexOf($scope.race.racers[i].score);
+      
+      if (index < 0) {
+        $scope.scores.push($scope.race.racers[i].score);
+      }
     }
-  }
-  
-  $scope.scores = $scope.scores.sort().reverse();
+    
+    $scope.scores = $scope.scores.sort().reverse();
+  });
   
   $scope.get_racer = function (index) {
     return $scope.race.racers[index];
