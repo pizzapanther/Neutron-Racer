@@ -22,11 +22,41 @@
     </md-toolbar>
     <div layout="row" flex>
       <div layout="column" flex id="content">
-        <md-content layout="column" flex class="md-padding">
+        <md-content layout="column" flex class="content md-padding">
           <div>
             <md-button href="https://google.com" class="md-raised md-primary">
-              Chrome Web Store
+              <md-icon>shop</md-icon> Chrome Web Store
             </md-button>
+            <md-button href="app.html" class="md-raised md-primary">
+              <md-icon>public</md-icon> Web Version
+            </md-button>
+          </div>
+          <div>
+            <p>
+              Neutron Racer makes it a snap to run your Pinewood Derby races. 
+              Just enter the names of your racers and the number of tracks you 
+              have and your off.  Neutron Racer will schedule the races needed 
+              and keep track of scores for you.
+            </p>
+            <p>
+              In order to make sure your event runs smoothly, Neutron Racer 
+              uses the Chaotic-Rotation Method to schedule your races.  This 
+              method of scheduling allows all racers to race the same number of 
+              times and thus keeps your audience more fully engaged during the 
+              whole event.  This method also is more efficient and allows you 
+              to run bigger events faster because no elimination round is 
+              needed unless there is a tie in score.
+            </p>
+            <p>
+              The scoring for each race is based on Mario Kart where the first 
+              place racer receives the most points.  The racer with the most 
+              total points at the end wins.
+            </p>
+            <p>
+              Neutron Racer is open source.  Feel free to contribute and comment 
+              at: <a href="https://github.com/pizzapanther/Neutron-Racer">
+                https://github.com/pizzapanther/Neutron-Racer</a>
+            </p>
           </div>
         </md-content>
       </div>
@@ -44,6 +74,16 @@
           .primaryPalette('teal')
           .accentPalette('amber');
       });
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-4108685-19', 'auto');
+      ga('send', 'pageview');
+    
     </script>
   </body>
 </html>

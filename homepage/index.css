@@ -37,3 +37,19 @@
   display: block;
   padding: 5px 15px 0 0;
 }
+
+.md-toolbar-tools h1 {
+  font-weight: bold;
+  font-size: 130%;
+}
+
+.content > div {
+  max-width: 650px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+}
+
+.content > div a.md-button {
+  font-size: 1.4rem;
+  padding: 5px 15px;
+}
