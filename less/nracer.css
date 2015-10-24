@@ -31,6 +31,10 @@
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
+body,
+html {
+  font-size: 1.0rem;
+}
 .md-toolbar-tools h1 {
   font-size: 1.4rem;
   font-weight: bold;

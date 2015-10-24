@@ -1,5 +1,7 @@
 nracer.controller('NewRaceCtrl', function ($scope, $location, RaceService) {
-  var key = RaceService.new_race();
-  
-  $location.url('/race/' + key);
+  RaceService.ready().then(function () {
+    var key = RaceService.new_race();
+    
+    $location.url('/race/' + key);
+  });
 });
