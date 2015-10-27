@@ -43,8 +43,13 @@
   font-size: 130%;
 }
 
+.tac {
+  text-align: center;
+}
+
 .content > div {
   max-width: 650px;
+  width: 100%;
   margin: 0 auto;
   font-size: 1.2rem;
 }
@@ -52,4 +57,12 @@
 .content > div a.md-button {
   font-size: 1.4rem;
   padding: 5px 15px;
+}
+
+iframe {
+  display: block;
+  margin: 15px auto;
+  width: 100%;
+  max-width: 560px;
+  height: 315px;
 }
