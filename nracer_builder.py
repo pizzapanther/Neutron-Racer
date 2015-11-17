@@ -3,7 +3,10 @@
 import os
 import subprocess
 
-def run ():
+EXCLUDES = ['nracer.zip', '.git', '.py', '.less', '.json', '.md',
+  'service-worker', 'index.html', '.txt']
+
+def find_files ():
   to_zip = []
   
   for root, dirs, files in os.walk('.'):
@@ -18,11 +21,23 @@ def run ():
         if 'demos' in path or 'modules' in path:
           continue
           
-      elif 'nracer.zip' in path or '.git' in path:
-        continue
-        
+      else:
+        skip = False
+        for exclude in EXCLUDES:
+          if exclude in path:
+            skip = True
+            break
+            
+        if skip:
+          continue
+          
       to_zip.append(path)
       
+  return to_zip
+  
+def run ():
+  to_zip = find_files()
+  
   cmd = 'zip nracer.zip'
   
   for path in to_zip:
