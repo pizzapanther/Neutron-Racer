@@ -41,5 +41,7 @@
   ],
   "start_url": "app.html",
   "display": "standalone",
-  "orientation": "portrait"
+  "background_color": "#FFFFFF",
+  "theme_color": "#009688",
+  "orientation": "any"
 }
