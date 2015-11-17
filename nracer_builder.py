@@ -3,8 +3,7 @@
 import os
 import subprocess
 
-EXCLUDES = ['nracer.zip', '.git', '.py', '.less', '.json', '.md',
-  'service-worker', 'index.html', '.txt']
+EXCLUDES = ['nracer.zip', '.git', '.py', '.less', '.md', 'service-worker', 'index.html', '.txt']
 
 def find_files ():
   to_zip = []
