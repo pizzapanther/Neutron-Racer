@@ -35,6 +35,12 @@
               <md-menu-item>
                 <md-button ng-click="goto('/races')">Stored Races</md-button>
               </md-menu-item>
+              <md-menu-item ng-if="notif.available && !notif.subscription">
+                <md-button ng-click="subscribe()">Get Release Notifications & News</md-button>
+              </md-menu-item>
+              <md-menu-item ng-if="notif.available && notif.subscription">
+                <md-button ng-click="unsubscribe()">Disable Notifications & News</md-button>
+              </md-menu-item>
             </md-menu-content>
           </md-menu>
         </div>
@@ -66,7 +72,7 @@
     <script src="/nracer/srvc-storage.js"></script>
     <script src="/nracer/srvc-race.js"></script>
     <script src="/nracer/srvc-chaotic-rotation.js"></script>
-    
-    <script src="/nracer/service-worker-init.js"></script>
+    <script src="/nracer/srvc-notification.js"></script>
+    <script src="/nracer/srvc-worker-init.js"></script>
   </body>
 </html>

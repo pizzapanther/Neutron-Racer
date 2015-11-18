@@ -8,4 +8,10 @@
       <md-icon>list</md-icon> Stored Races
     </md-button>
   </div>
+  <div ng-if="notif.available && !notif.subscription">
+    <br>
+    <md-button class="md-raised" ng-click="subscribe()">
+      <md-icon>notifications_active</md-icon> Get Release Notifications & News
+    </md-button>
+  </div>
 </div>

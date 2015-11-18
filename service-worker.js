@@ -1,4 +1,4 @@
-var CACHE_NAME = 'v1447791041.0';
+var CACHE_NAME = 'v1447805943.0';
 var urlsToCache = [
   '/',
   '/bower.json', 
@@ -166,7 +166,9 @@ var urlsToCache = [
   '/nracer/ctrl-race-edit.js', 
   '/nracer/ctrl-new-race.js', 
   '/nracer/srvc-chaotic-rotation.js', 
+  '/nracer/srvc-notification.js', 
   '/nracer/ctrl-race-heat.js', 
+  '/nracer/srvc-worker-init.js', 
   '/nracer/ctrl-app.js', 
   '/nracer/srvc-race.js', 
   '/less/nracer.css'

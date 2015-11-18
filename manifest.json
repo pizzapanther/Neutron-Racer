@@ -2,7 +2,7 @@
   "name": "Neutron Racer",
   "short_name": "NeutronRacer",
   "description": "Application for managing Pinewood Derby races or other similar races.",
-  "version": "15.10.3",
+  "version": "15.11.1",
   
   "app": {
     "background": {

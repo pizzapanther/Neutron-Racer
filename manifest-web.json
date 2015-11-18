@@ -1,6 +1,16 @@
 {
   "name": "Neutron Racer",
   "short_name": "NeutronRacer",
+  
+  "gcm_sender_id": "1053877490348",
+  
+  "start_url": "app.html",
+  
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#009688",
+  "orientation": "any",
+  
   "icons": [
     {
       "src": "img/icon-36.png",
@@ -37,10 +47,5 @@
       "sizes": "256x256",
       "type": "image/png"
     }
-  ],
-  "start_url": "app.html",
-  "display": "standalone",
-  "background_color": "#FFFFFF",
-  "theme_color": "#009688",
-  "orientation": "any"
+  ]
 }
