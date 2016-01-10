@@ -1,5 +1,5 @@
 nracer.controller('AppCtrl', function ($scope, $location, WorkerService, NotifService) {
-  $scope.version = '15.11.1';
+  $scope.version = '16.1.1';
   
   $scope.notif = NotifService.data;
   $scope.subscribe = function () {

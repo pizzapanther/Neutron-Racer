@@ -16,8 +16,8 @@ nracer.service("WorkerService", function (NotifService) {
         
         scope.$apply(function () {
           NotifService.data.registration = registration;
-          NotifService.data.available = true;
-          NotifService.get_subscription(scope);
+          //NotifService.data.available = true;
+          //NotifService.get_subscription(scope);
         });
       })
       
