@@ -1,14 +1,17 @@
-var CACHE_NAME = 'v1447805943.0';
+var CACHE_NAME = 'v1452471929.0';
 var urlsToCache = [
   '/',
   '/bower.json', 
+  '/apple-touch-icon-iphone.png', 
   '/manifest-web.json', 
   '/chrome-app.js', 
+  '/apple-touch-icon-ipad.png', 
   '/LICENSE', 
   '/manifest.json', 
   '/.bowerrc', 
   '/favicon.ico', 
   '/app.html', 
+  '/apple-touch-icon-iphone-retina-display.png', 
   '/templates/welcome.html', 
   '/templates/race-edit.html', 
   '/templates/stored-races.html', 
